@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Vamos Comprar!";
+}
+
+<div class="row">
+    <h2>Produtos</h2>
+</div>
+
+<div class="row">
+    <form action="" method="get" id="frmCategoria" class="option">
+        <span>Categorias</span>
+
+        <select id="categoria" name="categoria" class="form-control" onchange="$('#frmCategoria').submit()">
+            <option value="">Tudo</option>
+
+            @foreach (var item in ViewBag.Categorias)
+            {
+                if (ViewBag.CategoriaSelectionada == item.Descricao)
+                {
+                    <option selected value="@item.Descricao">@item.Descricao</option>
+                }
+                else
+                {
+                    <option value="@item.Descricao">@item.Descricao</option>
+                }
+            }
+
+        </select>
+    </form>
+</div>
+
+@if (ViewBag.Produtos.Count == 0)
+{
+    <br />
+    <div class="alert alert-info">
+        <strong>Bem-vindo!</strong> Nosso carinho está vazio
+    </div>
+}
+else
+{
+    <div class="row produtos">
+        @foreach (var item in ViewBag.Produtos)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2 list-item">
+                <span class="p-cart">@item.Categoria.Descricao</span>
+                <span class="p-name">@item.Nome</span>
+                <span class="p-description">@item.Descricao</span>
+
+                <div class="add-carinho">
+                    @Html.ActionLink("Adicionar", "AdicionaAoCarrinho", "Home", new { id = item.Id, categoria = ViewBag.CategoriaSelectionada }, new { @class= "btn btn-primary" })
+                    <span disabled class="btn btn-info">@String.Format(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", item.Preco)</span>
+                </div>
+            </div>
+        }
+    </div>
+
+}

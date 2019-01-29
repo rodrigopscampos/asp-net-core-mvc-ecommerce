@@ -1,0 +1,59 @@
+﻿@model AspNetCoreMvcEcommerce.Ordem
+@{
+    ViewBag.Title = "Parabéns!";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Parabéns</h2>
+<div class="alert alert-success">
+    A compra foi realizada com sucesso ! :)
+</div>
+<h4>Dados da entrega:</h4>
+<table class="table table-striped table-bordered ">
+    <tbody>
+        <tr>
+            <td>Nome</td>
+            <td>@Model.Cliente.Nome</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>@Model.Cliente.Email</td>
+        </tr>
+        <tr>
+            <td>Endereço</td>
+            <td>@Model.Endereco - @Model.CEP</td>
+        </tr>
+        <tr>
+            <td>Código da compra</td>
+            <td>@Model.Id</td>
+        </tr>
+    </tbody>
+</table>
+<hr />
+<h4>Produtos:</h4>
+<table class="table table-striped table-bordered ">
+    <thead>
+        <tr>
+            <td> Produto </td>
+            <td> Quantidade </td>
+            <td> Valor Total </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrdemItems)
+        {
+            <tr>
+                <td>@item.Produto.Nome </td>
+                <td>@item.Quantidade </td>
+                <td>@String.Format(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", item.Preco) </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="2"><strong>Total</strong> </td>
+            <td>
+                <strong>
+                    @String.Format(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Model.PrecoTotal)
+                </strong>
+            </td>
+        </tr>
+    </tbody>
+</table>

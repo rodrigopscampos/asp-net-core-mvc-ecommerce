@@ -1,0 +1,60 @@
+﻿@model AspNetCoreMvcEcommerce.Models.CestaDeCompra
+@{
+    ViewBag.Title = "Quase lá";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts {
+    <script>
+        function incrementar(produtoId) {
+            $.post("checkout", { acao: 'incrementar', produtoId: produtoId })
+                .done(function () {
+                    location.reload();
+                });
+        }
+
+        function decrementar(produtoId) {
+            $.post("checkout", { acao: 'decrementar', produtoId: produtoId })
+                .done(function () {
+                    location.reload();
+                });
+        }
+
+        function remover(produtoId) {
+            $.post("checkout", { acao: 'remover', produtoId: produtoId })
+                .done(function () {
+                    location.reload();
+                });
+        }
+    </script>
+}
+<h2>Carrinho de compras</h2>
+@if (Model.QuantidadeDeItens == 0)
+{
+    <br />
+    <div id="EmptyDataMsg" class="alert alert-info">
+        <strong>Bem-Vindo:</strong> Seu carrinho está vazio, vamos as compras!
+    </div>
+}
+else
+{
+    <table class="table table-striped">
+        @foreach (var item in Model.Itens.Values)
+        {
+            <tr>
+                <td>@item.NomeDoProduto</td>
+                <td>@String.Format("{0:c}", item.PrecoUnitario) </td>
+                <td>
+                    <span>
+                        <button class="btn btn-primary" onclick="incrementar(@item.ProdutoId)">+</button>
+                        <span>@item.Quantidade</span>
+                        <button class="btn btn-secondary " onclick="decrementar(@item.ProdutoId)">-</button>
+                        <button class="btn btn-danger " onclick="remover(@item.ProdutoId)">Remover</button>
+                    </span>
+                </td>
+            </tr>
+        }
+        <tr><td>Total: </td><td id="totalPrice" colspan="2">@String.Format("{0:c}", Model.PrecoTotal)</td></tr>
+    </table>
+    @Html.ActionLink("Limpar", "Limpar", "Checkout", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Continuar", "Continuar", "Checkout", null, new { @class = "btn btn-info" })
+}
