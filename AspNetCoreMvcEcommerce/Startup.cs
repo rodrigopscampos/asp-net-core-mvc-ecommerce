@@ -36,8 +36,8 @@ namespace AspNetCoreMvcEcommerce
             });
 
             services.AddDbContext<AspNetCoreMvcEcommerceContext>(options =>
-            options.UseInMemoryDatabase("DefaultDatabase")
-                // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            //options.UseInMemoryDatabase("DefaultDatabase")
+             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
 
             services.AddDefaultIdentity<IdentityUser>()
