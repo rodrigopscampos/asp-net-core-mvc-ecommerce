@@ -35,8 +35,16 @@ namespace AspNetCoreMvcEcommerce
              options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
 
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<AspNetCoreMvcEcommerceContext>();
+            services.AddDefaultIdentity<IdentityUser>(options => 
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 2;
+                options.Password.RequiredUniqueChars = 1;
+            })
+            .AddEntityFrameworkStores<AspNetCoreMvcEcommerceContext>();
 
             services.AddDistributedMemoryCache();
 
