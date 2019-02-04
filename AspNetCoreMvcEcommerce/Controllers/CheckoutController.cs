@@ -27,27 +27,30 @@ namespace AspNetCoreMvcEcommerce.Controllers
         // GET: Checkout
         public ActionResult Index(string acao = null, int? produtoId = null)
         {
+            var carrinho = PegarCarrinhoDeCompras();
+
             if (produtoId.HasValue)
             {
-                var produto = CarrinhoDeCompras.GetItem(produtoId.Value);
+                var produto = carrinho.GetItem(produtoId.Value);
+
                 switch (acao)
                 {
                     case "incrementar":
                         produto.Quantidade++;
-                        CarrinhoDeCompras.SetItem(produto);
+                        carrinho.SetItem(produto);
                         break;
 
                     case "decrementar":
                         produto.Quantidade--;
-                        CarrinhoDeCompras.SetItem(produto);
+                        carrinho.SetItem(produto);
 
                         if (produto.Quantidade == 0)
-                            CarrinhoDeCompras.Remove(produtoId.Value);
+                            carrinho.Remove(produtoId.Value);
 
                         break;
 
                     case "remover":
-                        CarrinhoDeCompras.Remove(produtoId.Value);
+                        carrinho.Remove(produtoId.Value);
                         break;
 
                     default:
@@ -55,13 +58,18 @@ namespace AspNetCoreMvcEcommerce.Controllers
                 }
             }
 
-            ViewBag.CarrinhoDeCompras = CarrinhoDeCompras;
-            return View(CarrinhoDeCompras);
+            ViewBag.CarrinhoDeCompras = carrinho;
+            SalvarCarrinhoDeCompras(carrinho);
+
+            return View(carrinho);
         }
 
         public ActionResult Limpar()
         {
-            this.CarrinhoDeCompras.Limpar();
+            var carrinho = PegarCarrinhoDeCompras();
+            carrinho.Limpar();
+            SalvarCarrinhoDeCompras(carrinho);
+
             return RedirectToAction("Index", "Home", null);
         }
 
@@ -91,6 +99,8 @@ namespace AspNetCoreMvcEcommerce.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    var carrinho = PegarCarrinhoDeCompras();
+
                     var ordem = new Ordem
                     {
                         DataDeCriacao = DateTime.Now,
@@ -100,7 +110,7 @@ namespace AspNetCoreMvcEcommerce.Controllers
                         CEP = detalhes.CEP,
                         CcNumero = detalhes.CcNumero,
                         CcValidade = detalhes.CcValidade,
-                        OrdemItems = CarrinhoDeCompras.Itens.Values.Select(i => new OrdemItem
+                        OrdemItems = carrinho.Itens.Values.Select(i => new OrdemItem
                         {
                             Preco = i.PrecoTotal,
                             ProdutoId = i.ProdutoId,
@@ -111,7 +121,8 @@ namespace AspNetCoreMvcEcommerce.Controllers
                     _ctx.Ordens.Add(ordem);
                     _ctx.SaveChanges();
 
-                    CarrinhoDeCompras.Limpar();
+                    carrinho.Limpar();
+                    SalvarCarrinhoDeCompras(carrinho);
 
                     return RedirectToAction("CompraRealizadaComSucesso", new { ordemId = ordem.Id });
                 }

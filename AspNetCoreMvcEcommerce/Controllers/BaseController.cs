@@ -8,44 +8,30 @@ using Newtonsoft.Json;
 
 namespace AspNetCoreMvcEcommerce.Controllers
 {
-    public static class SessionExtensions
-    {
-        public static void Set<T>(this ISession session, string key, T value)
-        {
-            session.SetString(key, JsonConvert.SerializeObject(value));
-        }
-
-        public static T Get<T>(this ISession session, string key)
-        {
-            var value = session.GetString(key);
-
-            return value == null ? default(T) :
-                JsonConvert.DeserializeObject<T>(value);
-        }
-    }
-
     public class BaseController : Controller
     {
-        protected CestaDeCompra CarrinhoDeCompras
+        public CestaDeCompra PegarCarrinhoDeCompras()
         {
-            get
+            var cesta = HttpContext.Session.GetString("cesta");
+
+            if(cesta == null)
             {
-                var cesta = HttpContext.Session.Get<CestaDeCompra>("cesta");
-
-                if (cesta == null)
-                {
-                    cesta = new CestaDeCompra();
-                    HttpContext.Session.Set("cesta", cesta);
-                }
-
-                return cesta;
+                return new CestaDeCompra();
             }
+
+            return JsonConvert.DeserializeObject<CestaDeCompra>(cesta);
+        }
+
+        public void SalvarCarrinhoDeCompras(CestaDeCompra cesta)
+        {
+            var cestaString = JsonConvert.SerializeObject(cesta);
+            HttpContext.Session.SetString("cesta", cestaString);
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             ViewBag.UsuarioAdmin = User.IsInRole("admin");
-            ViewBag.CarrinhoDeCompras = this.CarrinhoDeCompras;
+            ViewBag.CarrinhoDeCompras = PegarCarrinhoDeCompras();
 
             base.OnActionExecuting(context);
         }

@@ -1,5 +1,6 @@
 ﻿using AspNetCoreMvcEcommerce.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace AspNetCoreMvcEcommerce.Controllers
@@ -25,6 +26,7 @@ namespace AspNetCoreMvcEcommerce.Controllers
             else
             {
                 ViewBag.Produtos = _ctx.Categorias
+                                        .Include(c => c.Produtos)
                                         .Single(c => c.Descricao == categoria)
                                         .Produtos
                                         .ToList();
@@ -36,7 +38,9 @@ namespace AspNetCoreMvcEcommerce.Controllers
         public ActionResult AdicionaAoCarrinho(int id, string categoria)
         {
             var produto = _ctx.Produtos.FirstOrDefault(p => p.Id == id);
-            this.CarrinhoDeCompras.AdicionaProduto(produto);
+            var carrinho = PegarCarrinhoDeCompras();
+            carrinho.AdicionaProduto(produto);
+            SalvarCarrinhoDeCompras(carrinho);
 
             return RedirectToAction(nameof(Index), new { categoria = categoria });
         }
