@@ -142,14 +142,24 @@ namespace AspNetCoreMvcEcommerce.Controllers
                 }
             }
 
+            ViewBag.Estados = new[]
+            {
+                new SelectListItem { Value = "SP",  Text = "São Paulo", Selected = true },
+                new SelectListItem { Value = "RJ",  Text = "Rio de Janeiro" },
+                new SelectListItem { Value = "MG",  Text = "Minas Gerais"   }
+            };
+
             return View(detalhes);
         }
 
         public ActionResult CompraRealizadaComSucesso(int ordemId)
         {
+            var t = _ctx.Ordens.Include(o => o.Cliente).FirstOrDefault(o => o.Id == ordemId);
+
             var ordem = _ctx.Ordens
                     .Include(o => o.Cliente)
-                    .Include(o => o.OrdemItems.Select(i => i.Produto))
+                    .Include(o => o.OrdemItems)
+                        .ThenInclude(o => o.Produto)
                     .FirstOrDefault(o => o.Id == ordemId);
 
             return View(ordem);

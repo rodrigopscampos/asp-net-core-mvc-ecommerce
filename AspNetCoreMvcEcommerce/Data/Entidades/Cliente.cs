@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -8,10 +9,6 @@ namespace AspNetCoreMvcEcommerce
     {
         public string Nome { get; set; }
 
-       // public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Cliente> manager)
-       // {
-       //     var userIdentity = await  .CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-       //     return userIdentity;
-       // }
+        public virtual ICollection<Ordem> Ordens {get;set;}
     }
 }

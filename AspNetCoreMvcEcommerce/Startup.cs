@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using System;
 
 namespace AspNetCoreMvcEcommerce
@@ -30,10 +32,11 @@ namespace AspNetCoreMvcEcommerce
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<AspNetCoreMvcEcommerceContext>(options =>
+            services.AddDbContext<AspNetCoreMvcEcommerceContext>(options => {
             //options.UseInMemoryDatabase("DefaultDatabase")
-             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-            );
+             options.UseLoggerFactory( new LoggerFactory(new[] { new ConsoleLoggerProvider((sql, level) => true, true)  }));
+             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             services.AddDefaultIdentity<IdentityUser>(options => 
             {
