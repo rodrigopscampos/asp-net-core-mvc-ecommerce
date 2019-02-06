@@ -13,13 +13,13 @@ namespace AspNetCoreMvcEcommerce.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<Cliente> _userManager;
+        private readonly SignInManager<Cliente> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<Cliente> userManager,
+            SignInManager<Cliente> signInManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;

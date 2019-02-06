@@ -11,12 +11,12 @@ namespace AspNetCoreMvcEcommerce.Areas.Identity.Pages.Account.Manage
 {
     public class SetPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<Cliente> _userManager;
+        private readonly SignInManager<Cliente> _signInManager;
 
         public SetPasswordModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<Cliente> userManager,
+            SignInManager<Cliente> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

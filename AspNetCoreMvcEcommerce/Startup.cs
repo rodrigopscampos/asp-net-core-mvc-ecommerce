@@ -38,7 +38,7 @@ namespace AspNetCoreMvcEcommerce
              options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddDefaultIdentity<IdentityUser>(options => 
+            services.AddDefaultIdentity<Cliente>(options => 
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;

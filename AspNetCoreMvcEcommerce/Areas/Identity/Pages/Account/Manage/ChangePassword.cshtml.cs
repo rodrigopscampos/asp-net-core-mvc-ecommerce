@@ -11,13 +11,13 @@ namespace AspNetCoreMvcEcommerce.Areas.Identity.Pages.Account.Manage
 {
     public class ChangePasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<Cliente> _userManager;
+        private readonly SignInManager<Cliente> _signInManager;
         private readonly ILogger<ChangePasswordModel> _logger;
 
         public ChangePasswordModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<Cliente> userManager,
+            SignInManager<Cliente> signInManager,
             ILogger<ChangePasswordModel> logger)
         {
             _userManager = userManager;

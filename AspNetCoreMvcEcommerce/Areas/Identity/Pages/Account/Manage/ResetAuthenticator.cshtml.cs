@@ -11,13 +11,13 @@ namespace AspNetCoreMvcEcommerce.Areas.Identity.Pages.Account.Manage
 {
     public class ResetAuthenticatorModel : PageModel
     {
-        UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        UserManager<Cliente> _userManager;
+        private readonly SignInManager<Cliente> _signInManager;
         ILogger<ResetAuthenticatorModel> _logger;
 
         public ResetAuthenticatorModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<Cliente> userManager,
+            SignInManager<Cliente> signInManager,
             ILogger<ResetAuthenticatorModel> logger)
         {
             _userManager = userManager;

@@ -16,9 +16,9 @@ namespace AspNetCoreMvcEcommerce.Controllers
     public class CheckoutController : BaseController
     {
         AspNetCoreMvcEcommerceContext _ctx;
-        UserManager<IdentityUser> _userManager;
+        UserManager<Cliente> _userManager;
 
-        public CheckoutController(AspNetCoreMvcEcommerceContext ctx, UserManager<IdentityUser> userManager)
+        public CheckoutController(AspNetCoreMvcEcommerceContext ctx, UserManager<Cliente> userManager)
         {
             _ctx = ctx;
             _userManager = userManager;
@@ -154,8 +154,6 @@ namespace AspNetCoreMvcEcommerce.Controllers
 
         public ActionResult CompraRealizadaComSucesso(int ordemId)
         {
-            var t = _ctx.Ordens.Include(o => o.Cliente).FirstOrDefault(o => o.Id == ordemId);
-
             var ordem = _ctx.Ordens
                     .Include(o => o.Cliente)
                     .Include(o => o.OrdemItems)
