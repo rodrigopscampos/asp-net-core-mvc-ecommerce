@@ -21,7 +21,7 @@ namespace AspNetCoreMvcEcommerce.Models
         public string CcNumero { get; set; }
 
         [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Validade do cartão é requerida")]
         [Display(Name = "Validade")]
         public DateTime CcValidade { get; set; } = DateTime.Today.AddYears(1);

@@ -21,13 +21,15 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
         @Html.ActionLink("Meu Ecommerce", "Index", "")
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse teste" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     @Html.ActionLink("Sobre", "Sobre", "", new { area = "" }, new { @class = "nav-link" })
@@ -36,12 +38,14 @@
                     @Html.ActionLink("Contato", "Contato", "", new { area = "" }, new { @class = "nav-link" })
                 </li>
             </ul>
-            
+
             <partial name="_LoginPartial" />
 
-            <div class="nav-item">
+            <div class="pl-3"></div>
+
+            <ul class="nav navbar-nav navbar-right">
                 <a class="nav-link" href="/Checkout">Carrinho: @string.Format("{0}", ViewBag?.CarrinhoDeCompras?.QuantidadeDeItens ?? 0)  </a>
-            </div>
+            </ul>
         </div>
     </nav>
 
@@ -74,5 +78,11 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
+    
+    <link 
+        rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" 
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" 
+        crossorigin="anonymous">
+        
 </body>
 </html>

@@ -55,6 +55,6 @@ else
         }
         <tr><td>Total: </td><td id="totalPrice" colspan="2">@String.Format("{0:c}", Model.PrecoTotal)</td></tr>
     </table>
-    @Html.ActionLink("Limpar", "Limpar", "Checkout", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Limpar", "Limpar", "Checkout", null, new { @class = "btn btn-danger mr-2" })
     @Html.ActionLink("Continuar", "Continuar", "Checkout", null, new { @class = "btn btn-info" })
 }

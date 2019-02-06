@@ -83,7 +83,12 @@ namespace AspNetCoreMvcEcommerce.Controllers
                 new SelectListItem { Value = "MG",  Text = "Minas Gerais"   }
             };
 
-            return View();
+            var model = new Models.CheckoutDetalhesViewModel()
+            {
+                CcValidade = DateTime.Today
+            };
+
+            return View(model);
         }
 
         [HttpPost]
