@@ -73,7 +73,7 @@ namespace AspNetCoreMvcEcommerce
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseStatusCodePagesWithRedirects("/errors/index/{0}");
                 app.UseHsts();
             }
 

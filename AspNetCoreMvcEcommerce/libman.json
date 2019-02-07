@@ -3,7 +3,7 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "twitter-bootstrap@4.2.1" ,
+      "library": "twitter-bootstrap@4.2.1",
       "destination": "wwwroot/lib/bootstrap/"
     },
     {
@@ -13,6 +13,10 @@
     {
       "library": "popper.js@1.14.7",
       "destination": "wwwroot/lib/poppers"
+    },
+    {
+      "library": "twitter-bootstrap@4.2.1",
+      "destination": "wwwroot/lib/bootstrap/"
     }
   ]
 }
