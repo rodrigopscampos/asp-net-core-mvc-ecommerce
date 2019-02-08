@@ -1,5 +1,5 @@
 ﻿using System;
-using AspNetCoreMvcEcommerce.Data;
+using AspNetCoreMvcEcommerce.Database;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;

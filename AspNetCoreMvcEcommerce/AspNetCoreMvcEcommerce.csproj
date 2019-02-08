@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
-    <Folder Include="Data\Entidades\" />
   </ItemGroup>
 
 </Project>

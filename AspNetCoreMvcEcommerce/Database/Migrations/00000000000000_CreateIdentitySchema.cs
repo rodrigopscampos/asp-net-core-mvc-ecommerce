@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace AspNetCoreMvcEcommerce.Data.Migrations
+namespace AspNetCoreMvcEcommerce.Database.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

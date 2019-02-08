@@ -1,4 +1,4 @@
-﻿using AspNetCoreMvcEcommerce.Data;
+﻿using AspNetCoreMvcEcommerce.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
